@@ -585,9 +585,12 @@ wpa_supplicant_select_bss_non_wpa(struct wpa_supplicant *wpa_s,
 			}
 
 			if (bss->caps & IEEE80211_CAP_IBSS) {
+//#ifdef ANDROID_IBSS_HACK // FIXME
+				if (ssid->mode != IEEE80211_MODE_IBSS) {
 				wpa_printf(MSG_DEBUG, "   skip - "
 					   "IBSS (adhoc) network");
 				continue;
+				}
 			}
 
 			wpa_printf(MSG_DEBUG, "   selected non-WPA AP "
